@@ -1,4 +1,4 @@
-const roomId = 10009758;        // Mildomの部屋ID（URLの最後の数字）
+const roomId = 10176526;        // Mildomの部屋ID（URLの最後の数字）
 
 const chatNoticeMode = true;    // コメントを表示するかどうか
 const chatSpeed = 7000;         // コメントが流れる速度（少ないほど早い）

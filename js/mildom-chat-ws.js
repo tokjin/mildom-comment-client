@@ -72,6 +72,7 @@ $(document).ready(function () {
 
 let onOpen = (e) => {
     console.log("CONNECTED: "+roomId);
+    renderText.unshift({'text': 'ID:'+roomId+'へ接続しました。', 'type': 'info'});
     let guestId = "pc-gp-"+randText('Str',8)+"-"+randText('Str',4)+"-"+randText('Str',4)+"-"+randText('Int',4)+"-"+randText('Str',12);
     let userName = "guest"+randText('Int',6);
     doSend('{"userId":0,"level":1,"userName":"'+userName+'","guestId":"'+guestId+'","roomId":'+roomId+',"cmd":"enterRoom","reqId":1,"reConnect":1,"nobleLevel":0,"avatarDecortaion":0,"enterroomEffect":0,"nobleClose":0,"nobleSeatClose":0}');
@@ -79,6 +80,7 @@ let onOpen = (e) => {
 
 let onClose = (e) => {
     console.log("DISCONNECTED");
+    renderText.unshift({'text': '切断しました。', 'type': 'info'});
 }
 
 let onMessage = (e) => {
@@ -113,7 +115,7 @@ let onMessage = (e) => {
             break;
             
         case 'runCmdNotify': // その他の通知
-            if(d.runCmd = 'on_host_followed'){ // フォロー通知
+            if(d.runCmd == 'on_host_followed'){ // フォロー通知
                 console.log(d)
                 console.log(d.runCmd, d.runBody.user_name);
                 let followedUserName = d.runBody.user_name;

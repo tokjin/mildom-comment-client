@@ -24,7 +24,7 @@ let giftDraw = (giftId, count, senderName) => {
         }
     });
     
-    drawArea.append('<div class="chat gift"><img src="assets/mildom_logo.png" class="iconSize"> '+senderName+'さんが'+giftName+'を贈りました。x'+count+'</div>');
+    drawArea.append('<div class="chat gift">'+senderName+'さんが'+giftName+'を贈りました。x'+count+'</div>');
     /*
     
     if(giftNoticeFeederMode) renderText.unshift({'text': senderName+'さんが'+giftName+'を贈りました。x'+count, 'type': 'gift'});
@@ -74,7 +74,7 @@ let chatDraw = (text, name, img) => {
 }
 
 let requestTextillate = (d) => {
-    let insertTag = '<div class="chat comment"><img src="assets/mildom_logo.png" class="iconSize"> '+d.text+'</div>';
+    let insertTag = '<div class="chat comment notice"><img src="assets/mildom_logo.png" class="iconSize"> '+d.text+'</div>';
     drawArea.append(insertTag);
 }
 
