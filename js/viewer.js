@@ -25,6 +25,7 @@ let giftDraw = (giftId, count, senderName) => {
     });
     
     drawArea.append('<div class="chat gift">'+senderName+'さんが'+giftName+'を贈りました。x'+count+'</div>');
+        window.scrollTo(0, document.body.scrollHeight);
     /*
     
     if(giftNoticeFeederMode) renderText.unshift({'text': senderName+'さんが'+giftName+'を贈りました。x'+count, 'type': 'gift'});
@@ -70,12 +71,13 @@ let chatDraw = (text, name, img) => {
     else insertTag = '<div class="chat comment"><div id="name">'+name+'</div><div id="text">'+text+'</div></div>';
     
     drawArea.append(insertTag);
-    
+    window.scrollTo(0, document.body.scrollHeight);
 }
 
 let requestTextillate = (d) => {
     let insertTag = '<div class="chat comment notice"><img src="assets/mildom_logo.png" class="iconSize"> '+d.text+'</div>';
     drawArea.append(insertTag);
+    window.scrollTo(0, document.body.scrollHeight);
 }
 
 let checkFunc = () => {    
