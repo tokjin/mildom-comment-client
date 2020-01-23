@@ -56,18 +56,25 @@ $(document).ready(function () {
     getStickerList();
     getGiftList();
     
-    ws = new WebSocket(wsUri);
-    ws.onopen = function(e) { onOpen(e) };
-    ws.onclose = function(e) { onClose(e) };
-    ws.onmessage = function(e) { onMessage(e) };
-    ws.onerror = function(e) { onError(e) };
-
+    wsConnect();
     $(window).on("beforeunload", function (e) { ws.close(); });
 });
 
 //////////////////////////////////////////////////////////////
 ////////////            WebSocketの処理            ////////////
 //////////////////////////////////////////////////////////////
+
+let wsConnect = () => {
+    ws = new WebSocket(wsUri);
+    ws.onopen = (e) => { onOpen(e) };
+    ws.onclose = (e) => { onClose(e) };
+    ws.onmessage = (e) => { onMessage(e) };
+    ws.onerror = (e) => { onError(e) };
+}
+
+let wsDisconnect = () => {
+    ws.close()
+}
 
 let onOpen = (e) => {
     console.log("CONNECTED: "+roomId);
@@ -113,9 +120,11 @@ let onMessage = (e) => {
             console.log(d.cmd, d.userCount);
             break;
             
+        case 'onActivity': // ランキングなどの情報
+            break;
+            
         case 'runCmdNotify': // その他の通知
             if(d.runCmd == 'on_host_followed'){ // フォロー通知
-                console.log(d)
                 console.log(d.runCmd, d.runBody.user_name);
                 let followedUserName = d.runBody.user_name;
                 if(!followedUserName) followedUserName = 'guest'
@@ -130,13 +139,12 @@ let onMessage = (e) => {
 }
 
 let onError = (e) => {
-    console.log('ERROR:' + evt.data);
+    console.log('ERROR:' + e.data);
     ws.close();
 }
 
-let doSend = (message) => {
-    console.log("SENT: " + message);
-    ws.send(message);
+let doSend = (m) => {
+    ws.send(m);
 }
 
 

@@ -33,3 +33,8 @@
 .notice {
     background-color: #6ab4ff;
 }
+
+.debug {
+    background-color: #ffffff;
+    font-size: 12px;
+}

@@ -49,7 +49,10 @@ let chatDraw = (text, name, img) => {
 }
 
 let noticeDraw = (text, type) => {
-    let insertTag = '<div class="chat comment notice '+type+'"><img src="assets/mildom_logo.png" class="iconSize"> '+text+'</div>';
+    let insertTag = '<div class="chat comment notice '+type+'">';
+    if(type != 'debug') insertTag += '<div class="chat comment notice '+type+'"><img src="assets/mildom_logo.png" class="iconSize"> ';
+    insertTag += text+'</div>';
+    
     drawArea.append(insertTag);
     pageScroll();
 }
@@ -71,7 +74,6 @@ let pageScroll = () => {
 ////////////////////////////////////////////////////////
 
 $(document).ready(function () {
-    
     
 });
 
