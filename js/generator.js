@@ -4,6 +4,7 @@
 
 const notificationArea = $('.notificationArea');
 let mainLoop;
+let renderText = [];
 
 /////////////////////////////////////////////////////////
 ////////////            function             ////////////
@@ -73,6 +74,18 @@ let chatDraw = (text, name) => {
     $('#'+randId).animate({ left: -1920 }, chatSpeed, 'linear', function () {
         $('#'+randId).remove();
     });
+}
+
+let noticeDraw = (text, type) => {
+    renderText.unshift({'text': text, 'type': type});
+}
+
+let onAddDraw = (name) => {
+    renderText.push({'text': name+'さんが入室しました。', 'type': 'onAdd'});
+}
+
+let followDraw = (name) => {
+    renderText.unshift({'text': name+'さんがフォローしました。', 'type': 'follow'});
 }
 
 let requestTextillate = (d) => {

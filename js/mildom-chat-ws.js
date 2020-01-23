@@ -4,7 +4,6 @@
 
 let stickerList = [];
 let giftList = [];
-let renderText = [];
 let ws;
 const wsUri = "wss://jp-room1.mildom.com/?roomId=" + roomId;
 
@@ -72,7 +71,7 @@ $(document).ready(function () {
 
 let onOpen = (e) => {
     console.log("CONNECTED: "+roomId);
-    renderText.unshift({'text': 'ID:'+roomId+'へ接続しました。', 'type': 'info'});
+    noticeDraw('ID:'+roomId+' へ接続しました。', 'info');
     let guestId = "pc-gp-"+randText('Str',8)+"-"+randText('Str',4)+"-"+randText('Str',4)+"-"+randText('Int',4)+"-"+randText('Str',12);
     let userName = "guest"+randText('Int',6);
     doSend('{"userId":0,"level":1,"userName":"'+userName+'","guestId":"'+guestId+'","roomId":'+roomId+',"cmd":"enterRoom","reqId":1,"reConnect":1,"nobleLevel":0,"avatarDecortaion":0,"enterroomEffect":0,"nobleClose":0,"nobleSeatClose":0}');
@@ -80,7 +79,7 @@ let onOpen = (e) => {
 
 let onClose = (e) => {
     console.log("DISCONNECTED");
-    renderText.unshift({'text': '切断しました。', 'type': 'info'});
+    noticeDraw('ID:'+roomId+' を切断しました。', 'info');
 }
 
 let onMessage = (e) => {
@@ -93,7 +92,7 @@ let onMessage = (e) => {
             
         case 'onAdd': // 入室通知
             console.log(d.cmd, d.userName);
-            if(onAddNoticeMode) renderText.push({'text': d.userName+'さんが入室しました。', 'type': 'onAdd'});
+            if(onAddNoticeMode) onAddDraw(d.userName);
             break;
             
         case 'onLove': // 
@@ -120,7 +119,7 @@ let onMessage = (e) => {
                 console.log(d.runCmd, d.runBody.user_name);
                 let followedUserName = d.runBody.user_name;
                 if(!followedUserName) followedUserName = 'guest'
-                renderText.unshift({'text': followedUserName+'さんがフォローしました。', 'type': 'follow'});
+                if(followerNoticeMode) followDraw(followedUserName);
             } else console.log(d);
             break;
             

@@ -24,37 +24,11 @@ let giftDraw = (giftId, count, senderName) => {
         }
     });
     
-    drawArea.append('<div class="chat gift">'+senderName+'さんが'+giftName+'を贈りました。x'+count+'</div>');
-        window.scrollTo(0, document.body.scrollHeight);
-    /*
-    
-    if(giftNoticeFeederMode) renderText.unshift({'text': senderName+'さんが'+giftName+'を贈りました。x'+count, 'type': 'gift'});
-    if(!giftNoticeMode) return;
-    if(giftNoticeSound) $('#soundGift').get(0).play();
-    if(giftCategory == 3) count *= 15;
-    
-    [...Array(count)].map(() => { // 指定回数繰り返し
-        let randId = 'gift'+randText('Int', 8);
-        let randWidth = Math.random() * 1800;
-        let randHeight = -(Math.random() * 500 + 50);
-        let giftSpeedFix = giftSpeed + (Math.random() * 2500);
-        
-        let insertTag = '<img src="'+giftUrl+'" id="'+randId+'" class="gift" style="top: '+randHeight+'px; left: '+randWidth+'px;">';
-        $('.giftArea').append(insertTag);
-
-        $('#'+randId).css('display','block');
-        $('#'+randId).animate({ top: 975 }, giftSpeedFix, 'swing', function () {
-            $('#'+randId).animate({ top: 975 }, 3000, 'swing', function () {
-                $('#'+randId).remove();
-            });
-        });
-    })
-    */
-    
+    drawArea.append('<div class="chat gift">'+senderName+'さんが'+giftName+'('+giftPrice+')を贈りました。x'+count+'</div>');
+    pageScroll();
 }
 
 let chatDraw = (text, name, img) => {
-    
     let stickerPattern = /\[\/[+-]?\d+\]/g;
     let hitText = text.match(stickerPattern);
     
@@ -71,20 +45,25 @@ let chatDraw = (text, name, img) => {
     else insertTag = '<div class="chat comment"><div id="name">'+name+'</div><div id="text">'+text+'</div></div>';
     
     drawArea.append(insertTag);
-    window.scrollTo(0, document.body.scrollHeight);
+    pageScroll();
 }
 
-let requestTextillate = (d) => {
-    let insertTag = '<div class="chat comment notice"><img src="assets/mildom_logo.png" class="iconSize"> '+d.text+'</div>';
+let noticeDraw = (text, type) => {
+    let insertTag = '<div class="chat comment notice '+type+'"><img src="assets/mildom_logo.png" class="iconSize"> '+text+'</div>';
     drawArea.append(insertTag);
-    window.scrollTo(0, document.body.scrollHeight);
+    pageScroll();
 }
 
-let checkFunc = () => {    
-    if(renderText.length){
-        requestTextillate(renderText[0]);
-        renderText.splice(0,1);
-    }
+let onAddDraw = (name) => {
+    noticeDraw(name+'さんが入室しました。', 'onAdd');
+}
+
+let followDraw = (name) => {
+    noticeDraw(name+'さんがフォローしました。', 'follow');
+}
+
+let pageScroll = () => {
+    window.scrollTo(0, document.body.scrollHeight);
 }
 
 /////////////////////////////////////////////////////////
@@ -92,6 +71,7 @@ let checkFunc = () => {
 ////////////////////////////////////////////////////////
 
 $(document).ready(function () {
-    mainLoop = setInterval(checkFunc, 500);
+    
+    
 });
 
