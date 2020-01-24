@@ -1,4 +1,4 @@
-const roomId = 10176526;        // Mildomの部屋ID（URLの最後の数字）
+let roomId = 10022441;        // Mildomの部屋ID（URLの最後の数字）
 
 const chatNoticeMode = true;    // コメントを表示するかどうか
 const chatSpeed = 7000;         // コメントが流れる速度（少ないほど早い）
@@ -14,6 +14,8 @@ const followerNoticeSound = true;   // フォロー通知の際にサウンド�
 
 const onAddNoticeMode = false;      // 入室の通知を出すかどうか
 const userIcon = true;              // ビュワーでユーザーのアイコンを表示するかどうか
+
+const speechMode = false;           // ビュワーで読み上げを有効にするか
 
 // レイアウトやデザインはcssファイルを編集して下さい。
 // 通知音を変えたい場合はhtmlファイルを編集して下さい。

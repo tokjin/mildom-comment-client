@@ -5,7 +5,6 @@
 let stickerList = [];
 let giftList = [];
 let ws;
-const wsUri = "wss://jp-room1.mildom.com/?roomId=" + roomId;
 
 /////////////////////////////////////////////////////////
 ////////////            function             ////////////
@@ -57,14 +56,16 @@ $(document).ready(function () {
     getGiftList();
     
     wsConnect();
-    $(window).on("beforeunload", function (e) { ws.close(); });
+    $(window).on("beforeunload", function (e) { wsDisconnect });
 });
 
 //////////////////////////////////////////////////////////////
 ////////////            WebSocketの処理            ////////////
 //////////////////////////////////////////////////////////////
 
-let wsConnect = () => {
+let wsConnect = (id) => {
+    if(id) roomId = id;
+    let wsUri = "wss://jp-room1.mildom.com/?roomId=" + roomId;
     ws = new WebSocket(wsUri);
     ws.onopen = (e) => { onOpen(e) };
     ws.onclose = (e) => { onClose(e) };
@@ -99,7 +100,7 @@ let onMessage = (e) => {
             
         case 'onAdd': // 入室通知
             console.log(d.cmd, d.userName);
-            if(onAddNoticeMode) onAddDraw(d.userName);
+            onAddDraw(d.userName);
             break;
             
         case 'onLove': // 
@@ -113,7 +114,7 @@ let onMessage = (e) => {
             
         case 'onChat': // チャットの受信
             console.log(d.cmd, d.userName, d.msg);
-            if(chatNoticeMode) chatDraw(d.msg, d.userName, d.userImg);
+            chatDraw(d.msg, d.userName, d.userImg);
             break;
             
         case 'onUserCount': // 同時接続者数の通知
@@ -128,7 +129,7 @@ let onMessage = (e) => {
                 console.log(d.runCmd, d.runBody.user_name);
                 let followedUserName = d.runBody.user_name;
                 if(!followedUserName) followedUserName = 'guest'
-                if(followerNoticeMode) followDraw(followedUserName);
+                followDraw(followedUserName);
             } else console.log(d);
             break;
             

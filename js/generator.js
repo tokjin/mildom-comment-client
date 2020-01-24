@@ -51,6 +51,8 @@ let giftDraw = (giftId, count, senderName) => {
 }
 
 let chatDraw = (text, name) => {
+    if(!chatNoticeMode) return;
+    
     let randId = 'chat'+randText('Int', 8);
     let randHeight = Math.random() * 1000;
     if(text.length >= chatLengthMax) text = text.substr(0, chatLengthMax-2)+'...';
@@ -81,11 +83,11 @@ let noticeDraw = (text, type) => {
 }
 
 let onAddDraw = (name) => {
-    renderText.push({'text': name+'さんが入室しました。', 'type': 'onAdd'});
+    if(onAddNoticeMode) renderText.push({'text': name+'さんが入室しました。', 'type': 'onAdd'});
 }
 
 let followDraw = (name) => {
-    renderText.unshift({'text': name+'さんがフォローしました。', 'type': 'follow'});
+    if(followerNoticeMode) renderText.unshift({'text': name+'さんがフォローしました。', 'type': 'follow'});
 }
 
 let requestTextillate = (d) => {
