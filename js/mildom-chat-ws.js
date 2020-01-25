@@ -71,6 +71,7 @@ let wsConnect = (id) => {
     ws.onclose = (e) => { onClose(e) };
     ws.onmessage = (e) => { onMessage(e) };
     ws.onerror = (e) => { onError(e) };
+    noticeDraw('起動しました('+currentVer+')', 'info');
 }
 
 let wsDisconnect = () => {
