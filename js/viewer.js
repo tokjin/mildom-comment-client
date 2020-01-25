@@ -57,6 +57,7 @@ let giftDraw = (giftId, count, senderName) => {
 let chatDraw = (text, name, img) => {
     let stickerPattern = /\[\/[+-]?\d+\]/g;
     let hitText = text.match(stickerPattern);
+    speechText(text, 'comment');
     
     if(hitText){
         hitText.forEach(function(v){
@@ -71,7 +72,6 @@ let chatDraw = (text, name, img) => {
     else insertTag = '<div class="chat comment"><div id="name">'+name+'</div><div id="text">'+text+'</div></div>';
     
     drawArea.append(insertTag);
-    speechText(text, 'comment');
     statusCheck();
 }
 
