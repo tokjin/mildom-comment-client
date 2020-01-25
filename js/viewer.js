@@ -3,7 +3,8 @@
 ////////////////////////////////////////////////////////
 
 const drawArea = $('.drawArea');
-let chkbxScrollStatus, chkbxSpeakStatus, chkbxOnAddStatus, chkbxFollowStatus, chkbxGiftStatus, chkbxCommentStatus;
+let chkbxSpeakStatus, chkbxOnAddStatus, chkbxFollowStatus, chkbxGiftStatus, chkbxCommentStatus;
+let chkbxScrollStatus = true;
 
 if(chatNoticeMode){
     $('#chkComment').prop('checked', true);
