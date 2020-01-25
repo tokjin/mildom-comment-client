@@ -16,7 +16,7 @@ const onAddNoticeMode = false;      // 入室の通知を出すかどうか
 const userIcon = true;              // ビュワーでユーザーのアイコンを表示するかどうか
 
 const speechMode = false;           // ビュワーで読み上げを有効にするか
-const currentVer = 'v1.2.0';
+const currentVer = 'v1.2.1';
 
 // レイアウトやデザインはcssファイルを編集して下さい。
 // 通知音を変えたい場合はhtmlファイルを編集して下さい。
