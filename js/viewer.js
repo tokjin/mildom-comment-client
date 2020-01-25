@@ -76,6 +76,10 @@ let chatDraw = (text, name, img) => {
 }
 
 let noticeDraw = (text, type) => {
+    if(type == 'close') {
+        $('#stopBtn').css('display', 'none');
+        $('#startBtn').css('display', 'inline-block');
+    }
     let insertTag = '<div class="chat notice '+type+'">';
     if(type != 'debug') insertTag += '<img src="https://www.mildom.com/assets/mildom_logo.png" class="iconSize"> ';
     insertTag += text+'</div>';
