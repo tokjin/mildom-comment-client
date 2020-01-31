@@ -71,7 +71,6 @@ let wsConnect = (id) => {
     ws.onclose = (e) => { onClose(e) };
     ws.onmessage = (e) => { onMessage(e) };
     ws.onerror = (e) => { onError(e) };
-    noticeDraw('起動しました('+currentVer+')', 'info');
 }
 
 let wsDisconnect = () => {
@@ -80,7 +79,7 @@ let wsDisconnect = () => {
 
 let onOpen = (e) => {
     console.log("CONNECTED: "+roomId);
-    noticeDraw('ID:'+roomId+' へ接続しました。', 'open');
+    noticeDraw('ID:'+roomId+' へ接続しました。('+currentVer+')', 'open');
     let guestId = "pc-gp-"+randText('Str',8)+"-"+randText('Str',4)+"-"+randText('Str',4)+"-"+randText('Int',4)+"-"+randText('Str',12);
     let userName = "guest"+randText('Int',6);
     doSend('{"userId":0,"level":1,"userName":"'+userName+'","guestId":"'+guestId+'","roomId":'+roomId+',"cmd":"enterRoom","reqId":1,"reConnect":1,"nobleLevel":0,"avatarDecortaion":0,"enterroomEffect":0,"nobleClose":0,"nobleSeatClose":0}');
