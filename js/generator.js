@@ -69,7 +69,8 @@ let chatDraw = (text, name) => {
         })
     }
 
-    let insertTag = '<div id="'+randId+'" class="chat" style="display: none; left: 1920px; top: '+randHeight+'px;">'+text+'@'+name+'</div>';
+    if(chatInUserName) text = text + '@' + name
+    let insertTag = '<div id="'+randId+'" class="chat" style="display: none; left: 1920px; top: '+randHeight+'px;">'+text+'</div>';
     $('.chatArea').append(insertTag);
     
     $('#'+randId).css('display','block');

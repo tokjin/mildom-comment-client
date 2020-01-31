@@ -1,6 +1,7 @@
 let roomId = 10176526;        // Mildomの部屋ID（URLの最後の数字）
 
 const chatNoticeMode = true;    // コメントを表示するかどうか
+const chatInUserName = false;    // 流れるコメントに@名前を含める(含めない場合はfalse)
 const chatSpeed = 7000;         // コメントが流れる速度（少ないほど早い）
 const chatLengthMax = 30;       // コメントの最大表示文字数
 
